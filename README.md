@@ -1,7 +1,7 @@
 ## Introduction
 
 
-<b>Discipline | <b>git tutorial
+<b>Discipline | <b>git tutorial rec banda
 :--|:--|
 <b> Lab | <b> Fill your lab name here
 <b> Experiment|     <b> Fill your experiment name and number here
