@@ -1,7 +1,7 @@
 ## Introduction
 
 
-<b>Discipline | <b>Virtual Lab Workshop
+<b>Discipline | <b>Virtual Lab Workshop REC Banda
 :--|:--|
 <b> Lab | <b> Fill your lab name here
 <b> Experiment|     <b> Fill your experiment name and number here
