@@ -22,5 +22,5 @@ TO develope a VR application in which students can verify lens formula for combi
 
 SrNo | Name | Faculty or Student | Department| Institute | Email id
 :--|:--|:--|:--|:--|:--|
-1 |Pappu Kumar . | . | . | . | .
+1 |Pappu Kumar . |Student . |IT . |REC Banda . |2407340130039@recbanda.ac.in .
 2 | . | . | . | . | .
