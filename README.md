@@ -4,7 +4,8 @@
 <b>Discipline | <b>Information technology
 :--|:--|
 <b> Lab | <b> Virtual lab 
-<b> Develop a VR Lab  |     <b> Fill your experiment name and number here
+<b> Develop a VR Lab  |<b>Measurement of Focal Length of the Combination of the Two Lenses Separated by a Distance
+
 <b> Lab | <b>Virtual_Lab
 <b> Experiment|     <b>  Project 35: Develop a VR application where students can verify the lens formula for a combination of lenses.
 
