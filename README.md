@@ -3,7 +3,6 @@
 
 <b>Discipline | <b>Information technology
 :--|:--|
-<<<<<<< HEAD
 <b> Lab | <b> Virtual lab 
 <b> Develop a VR Lab  |     <b> Fill your experiment name and number here
 <b> Lab | <b>Virtual_Lab
@@ -15,11 +14,7 @@ TO develope a VR application in which students can verify lens formula for combi
 
 <b>Name of Developer|  <b> Develop a VR 
 :--|:--|
-<<<<<<< HEAD
-<b> Institute | <b>  
-<b> Email id|   <b>  
-<b> Department |  
-=======
+<b> Department |  Information Technology
 <b> Institute | <b> REC Banda
 <b> Email id| <b> 2407340130039@recbanda.in 
 <b> Department -| Information Technology 
