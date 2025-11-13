@@ -1,24 +1,26 @@
 ## Introduction
 
 
-<b>Discipline | <b>Virtual Lab Workshop Rec banda.
+<b>Discipline | <b>Information technology
 :--|:--|
-<b> Lab | <b> Fill your lab name here
-<b> Experiment|     <b> Fill your experiment name and number here
+<b> Lab | <b>Virtual_Lab
+<b> Experiment|     <b>  Project 35: Develop a VR 
+application where students can 
+verify the lens formula for a 
+combination of lenses.
 
 ### About the Experiment 
+TO develope a VR application in which students can verify lens formula for combination of lens.
 
-Fill a brief description of this experiment here
-
-<b>Name of Developer | <b> Develop a VR 
+<b>Name of Developer|  <b> Develop a VR 
 :--|:--|
-<b> Institute | <b>  
-<b> Email id|     <b>  
-<b> Department |  
+<b> Institute - REC Banda  | <b>  
+<b> Email id| 2407340130039@recbanda.in     <b>  
+<b> Department - Information Technology |  
 
 ### Contributors List
 
 SrNo | Name | Faculty or Student | Department| Institute | Email id
 :--|:--|:--|:--|:--|:--|
-1 | . | . | . | . | .
+1 |Pappu Kumar . | . | . | . | .
 2 | . | . | . | . | .
