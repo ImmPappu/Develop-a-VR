@@ -1,58 +1,376 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>My Resume</title>
+<meta charset="UTF-8">
+<title>VR Optics Lab – Lens Formula Verification</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+body{
+  margin:0;
+  overflow:hidden;
+  background:#1b1b1b;
+  font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;
+  color:#f2f2f2;
+}
+
+#title{
+  position:absolute;
+  top:16px;
+  left:16px;
+  background:rgba(0,0,0,0.75);
+  padding:12px 16px;
+  border-radius:10px;
+  font-size:14px;
+  line-height:1.5;
+}
+
+#formulaBox{
+  position:absolute;
+  top:16px;
+  right:16px;
+  background:rgba(0,0,0,0.75);
+  padding:10px 14px;
+  border-radius:10px;
+  font-size:16px;
+}
+
+#controlPanel{
+  position:absolute;
+  left:50%;
+  bottom:26px;
+  transform:translateX(-50%);
+  background:rgba(0,0,0,0.8);
+  padding:12px 20px;
+  border-radius:999px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+  font-size:13px;
+}
+
+#uSlider{
+  width:260px;
+}
+
+#valueBox{
+  position:absolute;
+  right:16px;
+  bottom:26px;
+  background:rgba(0,0,0,0.75);
+  padding:10px 14px;
+  border-radius:10px;
+  font-size:13px;
+  line-height:1.6;
+}
+
+#lensBox{
+  position:absolute;
+  left:16px;
+  bottom:26px;
+  background:rgba(0,0,0,0.75);
+  padding:10px 14px;
+  border-radius:10px;
+  font-size:13px;
+}
+</style>
 </head>
+
 <body>
-  <h1>Pappu Kumar</h1>
-  <p><b>Email:</b> appubdm06@gmail.com</p>
-  <p><b>Phone:</b> 9135051382 </p>
-  <p><b>Address:</b> Patna,Bihar, India</p>
 
-  <hr>
+<div id="title">
+<b>VR Optics Laboratory</b><br>
+Verification of Lens Formula<br>
+Object → Convex Lens → Screen
+</div>
 
-  <h2>Career Objective</h2>
-  <p>To learn and grow as an IT student and work on real-world projects that help me improve my skills.</p>
+<div id="formulaBox">
+1 / f = 1 / v + 1 / u
+</div>
 
-  <h2>Education</h2>
-  <ul>
-    <li><b>B.Tech in Information Technology</b> - Rajkiya Engineering College, Banda (2024–2028)</li>
-    <li><b>12th Board</b> - BSEB, Patna</li>
-  </ul>
+<div id="controlPanel">
+<label>Object Distance (u)</label>
+<input id="uSlider" type="range" min="12" max="45" value="24">
+</div>
 
-  <h2>Skills</h2>
-  <ul>
-    <li>  HTML                                   </li>
-    <li>  CSS                                    </li>
-    <li>  Basic C Programming                    </li>
-    <li>  JAVA Programming                       </li>
-    <li>  Video Editing                          </li>
-    <li>  Cloud Computing                        </li>
-    <li>Capcut and basic Davini Resolve Software </li>
+<div id="valueBox">
+<u>Calculated Values</u><br>
+u = <span id="uVal">24</span> cm<br>
+v = <span id="vVal">24</span> cm<br>
+f = <span id="fVal">15</span> cm
+</div>
 
-   </ul>
+<div id="lensBox">
+Lens focal length<br>
+<select id="lensSelect">
+  <option value="10">f = 10 cm</option>
+  <option value="15" selected>f = 15 cm</option>
+  <option value="20">f = 20 cm</option>
+</select>
+</div>
 
-  <h2>Projects</h2>
-  <ul>
-    <li><b> Card hover </b> Clone salesforces website  </li>
-    <li><b> Colour shapes on hover </b></li>
-  </ul>
+<script type="importmap">
+{
+  "imports":{
+    "three":"https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
 
-  <h2>Experience</h2>
-  <ul>
-    <li>Content Creator on YouTube — Uploading lyric status and vlog videos.</li>
-    <li>Cinematography and Photography </li>
-    <li>Member of Student Developer Club — Learning web development.</li>
-    <li>Volunteer in IPR Event in College which Boost my team collaboration.</li>
-  </ul>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { VRButton } from 'three/addons/webxr/VRButton.js';
 
-  <h2>Hobbies</h2>
-  <ul>
-    <li>Video Editing</li>
-    <li>Travel Vlogging</li>
-    <li>Listening to Music</li>
-  </ul>
+/* ================= SCENE SETUP ================= */
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xdddddd);
 
-  <hr>
-  <p><i>Thank you for viewing my resume.</i></p>
+const camera = new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.1, 50);
+camera.position.set(0.4,1.4,2.8);
+
+const renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.setSize(innerWidth, innerHeight);
+renderer.setPixelRatio(devicePixelRatio);
+renderer.xr.enabled = true;
+document.body.appendChild(renderer.domElement);
+document.body.appendChild(VRButton.createButton(renderer));
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.target.set(0,1.0,0);
+controls.enableDamping = true;
+controls.minDistance = 1.5;
+controls.maxDistance = 4.5;
+
+/* ================= LIGHTING ================= */
+scene.add(new THREE.AmbientLight(0xffffff,0.45));
+
+const dirLight = new THREE.DirectionalLight(0xffffff,1.2);
+dirLight.position.set(3,4,2);
+dirLight.castShadow = true;
+scene.add(dirLight);
+
+/* ================= TABLE ================= */
+const table = new THREE.Mesh(
+  new THREE.BoxGeometry(4.2,0.08,1.2),
+  new THREE.MeshStandardMaterial({color:0xb0895a, roughness:0.5})
+);
+table.position.set(0,0.8,0);
+table.receiveShadow = true;
+scene.add(table);
+
+/* ================= OPTICAL BENCH ================= */
+const bench = new THREE.Mesh(
+  new THREE.BoxGeometry(3.6,0.04,0.15),
+  new THREE.MeshStandardMaterial({color:0x222222, metalness:0.8, roughness:0.2})
+);
+bench.position.set(0,0.84,0);
+scene.add(bench);
+
+const AXIS_Y = 1.05;
+
+/* ================= OBJECT ================= */
+const objectGroup = new THREE.Group();
+
+const objectBase = new THREE.Mesh(
+  new THREE.BoxGeometry(0.22,0.02,0.15),
+  new THREE.MeshStandardMaterial({color:0x2a2a2a})
+);
+objectBase.position.y = 0.01;
+
+const objectRod = new THREE.Mesh(
+  new THREE.CylinderGeometry(0.015,0.015,0.25,24),
+  new THREE.MeshStandardMaterial({color:0x555555})
+);
+objectRod.position.y = 0.14;
+
+const objectBody = new THREE.Mesh(
+  new THREE.CylinderGeometry(0.035,0.035,0.22,32),
+  new THREE.MeshStandardMaterial({color:0xffe5c6})
+);
+objectBody.position.y = 0.28;
+
+objectGroup.add(objectBase, objectRod, objectBody);
+objectGroup.position.set(-1.1, AXIS_Y, 0);
+scene.add(objectGroup);
+
+/* ================= LENS ================= */
+const lensGroup = new THREE.Group();
+
+const lensBase = new THREE.Mesh(
+  new THREE.BoxGeometry(0.22,0.02,0.15),
+  new THREE.MeshStandardMaterial({color:0x2a2a2a})
+);
+lensBase.position.y = 0.01;
+
+const lensRod = new THREE.Mesh(
+  new THREE.CylinderGeometry(0.016,0.016,0.26,24),
+  new THREE.MeshStandardMaterial({color:0x555555})
+);
+lensRod.position.y = 0.15;
+
+const lensGlass = new THREE.Mesh(
+  new THREE.SphereGeometry(0.2,64,64),
+  new THREE.MeshPhysicalMaterial({
+    transmission:0.95,
+    roughness:0.05,
+    thickness:0.15,
+    ior:1.52,
+    color:0xeefcff
+  })
+);
+lensGlass.scale.set(1,1,0.25);
+lensGlass.rotation.y = Math.PI/2;
+lensGlass.position.y = 0.32;
+
+lensGroup.add(lensBase,lensRod,lensGlass);
+lensGroup.position.set(0,AXIS_Y,0);
+scene.add(lensGroup);
+
+/* ================= SCREEN ================= */
+const screenGroup = new THREE.Group();
+
+const screenBase = new THREE.Mesh(
+  new THREE.BoxGeometry(0.22,0.02,0.15),
+  new THREE.MeshStandardMaterial({color:0x2a2a2a})
+);
+screenBase.position.y = 0.01;
+
+const screenRod = new THREE.Mesh(
+  new THREE.CylinderGeometry(0.016,0.016,0.28,24),
+  new THREE.MeshStandardMaterial({color:0x555555})
+);
+screenRod.position.y = 0.16;
+
+const screenPanel = new THREE.Mesh(
+  new THREE.PlaneGeometry(0.45,0.32),
+  new THREE.MeshStandardMaterial({color:0xffffff})
+);
+screenPanel.rotation.y = Math.PI/2;
+screenPanel.position.y = 0.34;
+
+screenGroup.add(screenBase,screenRod,screenPanel);
+screenGroup.position.set(1.2,AXIS_Y,0);
+scene.add(screenGroup);
+
+/* ================= OPTICS LOGIC ================= */
+// Conversion factor from centimeters to world units
+const CM_TO_WORLD = 0.02;
+
+// Default focal length in cm
+let focalLength = 15;
+
+// DOM references
+const uSlider = document.getElementById('uSlider');
+const uVal = document.getElementById('uVal');
+const vVal = document.getElementById('vVal');
+const fVal = document.getElementById('fVal');
+const lensSelect = document.getElementById('lensSelect');
+
+// Group to draw light rays
+const rayGroup = new THREE.Group();
+scene.add(rayGroup);
+
+// Helper function to draw a ray between two points
+function drawRay(start, end, color){
+  const length = start.distanceTo(end);
+  const geometry = new THREE.CylinderGeometry(0.005,0.005,length,12);
+  const material = new THREE.MeshBasicMaterial({color});
+  const ray = new THREE.Mesh(geometry, material);
+  ray.position.copy(start).add(end).multiplyScalar(0.5);
+  ray.lookAt(end);
+  ray.rotateX(Math.PI/2);
+  rayGroup.add(ray);
+}
+
+// Main optics update function
+function updateOptics(){
+  rayGroup.clear();
+
+  const u = parseFloat(uSlider.value);
+  const f = focalLength;
+
+  // Lens formula: 1/f = 1/v + 1/u
+  const v = (f * u) / (u - f);
+
+  // Update UI values
+  uVal.textContent = u.toFixed(1);
+  vVal.textContent = v.toFixed(1);
+  fVal.textContent = f.toFixed(1);
+
+  // Update object and screen positions
+  objectGroup.position.x = -u * CM_TO_WORLD;
+  screenGroup.position.x = v * CM_TO_WORLD;
+
+  // World positions for rays
+  const objTop = new THREE.Vector3(
+    objectGroup.position.x,
+    objectGroup.position.y + 0.3,
+    0
+  );
+
+  const lensPoint = new THREE.Vector3(
+    lensGroup.position.x,
+    lensGroup.position.y + 0.3,
+    0
+  );
+
+  const screenPoint = new THREE.Vector3(
+    screenGroup.position.x,
+    screenGroup.position.y + 0.3,
+    0
+  );
+
+  // Draw principal rays
+  drawRay(objTop, lensPoint, 0xffcc00);
+
+  const focusPoint = new THREE.Vector3(
+    lensGroup.position.x + f * CM_TO_WORLD,
+    lensPoint.y,
+    0
+  );
+
+  drawRay(lensPoint, focusPoint, 0xff6600);
+  drawRay(focusPoint, screenPoint, 0xff6600);
+}
+
+// Lens focal length change handler
+lensSelect.addEventListener('change',()=>{
+  focalLength = parseFloat(lensSelect.value);
+
+  // Visual scaling of lens thickness based on focal length
+  const scaleZ = THREE.MathUtils.mapLinear(focalLength,10,20,0.35,0.2);
+  lensGlass.scale.z = scaleZ;
+
+  updateOptics();
+});
+
+// Slider input handler
+uSlider.addEventListener('input', updateOptics);
+
+// Initial update
+updateOptics();
+
+
+uSlider.addEventListener('input', updateOptics);
+updateOptics();
+
+/* ================= ANIMATION LOOP ================= */
+renderer.setAnimationLoop(()=>{
+  controls.update();
+  renderer.render(scene,camera);
+});
+
+/* ================= RESIZE ================= */
+window.addEventListener('resize',()=>{
+  camera.aspect = innerWidth/innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth,innerHeight);
+});
+
+</script>
 </body>
 </html>
